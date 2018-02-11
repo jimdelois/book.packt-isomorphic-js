@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "bluebird": "^3.5.1",
+    "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "del": "^3.0.0",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "extend": "^3.0.1",
+    "gaze": "^1.1.2",
+    "ncp": "^2.0.0",
+    "webpack": "^3.11.0"
+  }
+}
