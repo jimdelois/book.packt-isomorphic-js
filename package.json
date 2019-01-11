@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "lint": "eslint components core data routes test tools",
+    "build": "babel-node tools/run build",
+    "serve": "babel-node tools/run serve",
+  },
   "dependencies": {
     "babel-core": "^6.26.0",
     "bluebird": "^3.5.1",
