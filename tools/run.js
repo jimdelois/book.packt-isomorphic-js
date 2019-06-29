@@ -1,3 +1,5 @@
+// Used to augment (p. 23) build task runs with timestamps and other info.
+// Called in via build.js to decorate with this run
 function format(time) {
   return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
 }
@@ -13,10 +15,11 @@ async function run(fn, options) {
   console.log(`[${format(end)}] Finished '${fn.name}' after ${duration} ms.`);
 }
 
-if (process.mainModule.children.length === 0 && process.argv.length > 2) {
+if (require.main === module && process.argv.length > 2) {
   delete require.cache[__filename];
-  const module = process.argv[2];
+  const module = require(`./${process.argv[2]}.js`).default;
 
-  run(require('./' + module + '.js'))
-    .catch(err => console.error(err.stack));
+  run(module).catch(err => console.error(err.stack));
 }
+
+export default run;
