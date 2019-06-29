@@ -13,10 +13,13 @@ const common = {
     chunks: false
   },
 
+  // TODO: Figure out how to toggle this on builds...
+  mode: 'development',
+
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         include: [
           path.join(__dirname, '../api'),
           path.join(__dirname, '../components'),
@@ -26,7 +29,13 @@ const common = {
           path.join(__dirname, '../client.js'),
           path.join(__dirname, '../server.js')
         ],
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query  :{
+          presets:[
+            '@babel/react',
+        //     'es2015'
+          ]
+        }
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,

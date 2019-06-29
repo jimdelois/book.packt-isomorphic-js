@@ -2,7 +2,7 @@ import path from 'path';
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import App from './components/App';
+import Router from './core/Router';
 import Html from './components/Html';
 
 const server = express();
@@ -13,10 +13,10 @@ server.use(express.static(path.join(__dirname, 'public')));
 
 // Baseline route (pp. 19-20)
 server.get('*', (req, res) => {
-  const title = 'Sample Application';
-  const body = ReactDOM.renderToString(<App />);
+  const component = Router.match(req);
+  const body = ReactDOM.renderToString(component);
   const html = ReactDOM.renderToStaticMarkup(<Html
-    title={title}
+    title='Sample Application'
     description="Isomorphic web application sample"
     body={body} />);
 
