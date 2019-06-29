@@ -30,18 +30,18 @@ const common = {
           path.join(__dirname, '../server.js')
         ],
         loader: 'babel-loader',
-        query  :{
+        query: {
           presets:[
-            '@babel/react',
-        //     'es2015'
+            '@babel/react'
           ]
         }
       },
-      {
+      { // Will inject small images and fonts under 10KB into the app bundle
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        // loader: 'url-loader?limit=10000' <-- Will create randomized image name.
         loader: 'url-loader?limit=10000&name=[path][name].[ext]'
       },
-      {
+      { // A fairly "normal" way of loading binary files, etc.
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader&name=[path][name].[ext]'
       },
@@ -56,10 +56,16 @@ const common = {
           },
           {
             loader: 'css-loader',
+            // options: {
+            //   modules: true,
+            //   localIdentName: '[name]_[local]_[hash:base64:3]'
+            // }
+            // See: https://github.com/webpack-contrib/css-loader#localidentname
             options: {
-              modules: true,
-              localIdentName: '[name]_[local]_[hash:base64:3]'
-            }
+              modules: {
+                localIdentName: '[name]_[local]_[hash:base64:3]'
+              },
+            },
           },
           {
             loader: 'postcss-loader',
@@ -115,7 +121,7 @@ const server = extend(true, {}, common, {
 
 });
 
-// Remove `style-loader` from the server-side bundle configuration
+// Remove `style-loader` from the server-side bundle configuration (p. 65)
 server.module.rules[3].use.splice(0, 1);
 server.module.rules[3].use.unshift({
   loader: 'node-style-loader'
